@@ -1,0 +1,85 @@
+basePath: /
+definitions:
+  controllers.pet:
+    properties:
+      breed:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample web service.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Pet API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      operationId: check-health
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: check health
+  /pets:
+    get:
+      operationId: get-pets
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.pet'
+      summary: get all items in the pet list
+    post:
+      operationId: create-pet
+      parameters:
+      - description: Pet Data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.pet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.pet'
+      summary: add a new item to the pet list
+  /pets/{id}:
+    get:
+      operationId: get-pet-by-id
+      parameters:
+      - description: Pet ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.pet'
+      summary: get a pet by ID
+swagger: "2.0"
